@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ todolist.name }}{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-between align-items-center my-5">
+        <a class="btn btn-secondary justify-self-start " href="{{ path('todolist_index') }}">Revenir aux listes</a>
+
+        <div>
+            <h1 class="d-inline">{{ todolist.name }}</h1>
+            <a class="ml-3"
+               href="{{ path('todolist_edit', {'id': todolist.id}) }}">
+                <i
+                        class="fas fa-pen"></i>
+            </a>
+        </div>
+        <div class="px-5"></div>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Tâches</th>
+            <th class="text-right">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for todotask in todolist.todotasks %}
+            <tr>
+                <td>
+                    {% if todotask.completed %}
+                        <span class="badge badge-success mr-3">Faite</span>
+                    {% else %}
+                        <span class="badge badge-warning mr-3">A faire</span>
+                    {% endif %}
+                    {{ todotask.name }}</td>
+
+                <td class="text-md-right text-center">
+
+                    <a class="btn btn-secondary" href="{{ path('todotask_togglestatus', { 'id': todotask.id }) }}">Changer
+                        le statut</a>
+
+                    <a class="btn btn-primary"
+                       href="{{ path('todotask_edit', {'id': todotask.id}) }}"><i class="fas fa-pen"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2" class="text-center">Cette liste ne comporte pas encore de tâches</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="row justify-content-center align-items-center">
+               <a class="btn btn-success mr-3 " href="{{ path('todotask_new', {'listid': todolist.id }) }}">Ajouter une tâche</a>
+        <a class="btn btn-danger" href="{{ path('todolist_clear', {'id': todolist.id}) }}">Effacer les tâches
+            accomplies</a>
+    </div>
+{% endblock %}

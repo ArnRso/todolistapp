@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Renommer la tâche{% endblock %}
+
+{% block body %}
+    <h1>Renommer la tâche</h1>
+
+    {{ include('todotask/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+{% endblock %}

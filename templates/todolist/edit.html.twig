@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Renimmer la liste{% endblock %}
+
+{% block body %}
+    <h1>Renommer la liste</h1>
+
+    {{ include('todolist/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+
+{% endblock %}

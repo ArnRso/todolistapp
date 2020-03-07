@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les listes{% endblock %}
+
+{% block body %}
+
+    <div class="row justify-content-md-between justify-content-center align-items-center my-5">
+        <h1>Mes listes</h1>
+        <a class="btn btn-success" href="{{ path('todolist_new') }}">Créer une nouvelle liste</a>
+    </div>
+
+    <table class="table table-stripped">
+        <thead>
+        <tr>
+            <th class="text-left">Nom</th>
+            <th class="text-center">Nombre de tâches dans la liste</th>
+            <th class="text-right">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for todolist in todolists %}
+            <tr>
+                <td class="text-left">{{ todolist.name }}</td>
+                <td class="text-center">{{ todolist.todotasks | length }}</td>
+                <td class="text-right">
+                    <a class="btn btn-secondary text-light" href="{{ path('todolist_show', {'id': todolist.id}) }}">Détail</a>
+                    <a class="btn btn-danger" href="{{ path('todolist_delete', {'id': todolist.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3" class="text-center">Aucune liste trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+{% endblock %}
